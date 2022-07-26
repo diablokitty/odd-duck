@@ -1,8 +1,6 @@
 
 'use strict';
 
-<<<<<<< Updated upstream
-=======
 /*Assignment Goals
 
 As a user, I would like to display three unique products by chance so that the viewers can pick a favorite.
@@ -102,7 +100,6 @@ image3.src = productObjectList[displayObjects[2]].src;
 
 
 
->>>>>>> Stashed changes
 /* In Class Demo Code
 
 Goat Picker
