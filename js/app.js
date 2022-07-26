@@ -1,6 +1,108 @@
 
 'use strict';
 
+<<<<<<< Updated upstream
+=======
+/*Assignment Goals
+
+As a user, I would like to display three unique products by chance so that the viewers can pick a favorite.
+
+Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
+  For each of the three images, increment its property of times it has been shown by one.
+  Attach an event listener to the section of the HTML page where the images are going to be displayed.
+
+Once the users ‘clicks’ a product, generate three new products for the user to pick from.
+As a user, I would like to track the selections made by viewers so that I can determine which products to begin production on.
+  In the constructor function define a property to hold the number of times a product has been clicked.
+
+After every selection by the viewer, update the newly added property to reflect if it was clicked.
+
+Add a form that allows the user to control the number of voting rounds. (Separate page?)
+  Keep the number of rounds in a variable to allow the number to be easily changed for debugging and testing purposes.
+Add a report of results after all rounds of voting have concluded so that I can evaluate which products were the most popular.
+Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
+
+After voting rounds have been completed, remove the event listeners on the product.
+
+Add a button with the text View Results, which when clicked displays the list of all the products followed by the votes received, and number of times seen for each. Example: banana had 3 votes, and was seen 5 times.
+
+NOTE: Displayed product names should match the file name for the product. Example: the product represented with dog-duck.jpg should be displayed to the user as exactly “dog-duck” when the results are shown.
+
+Stretch Goals
+Handle the display and voting for an arbitrary number of images
+Using a variable, declare in your JS how many images to show.
+Based on that value, dynamically create that many <img> tags
+Also based on that value, ensure that your randomizer is properly handling the specified number of images for display and repeat tracking.
+*/
+
+
+//construct object for images:
+//properties 1.Name of the product 2.File path of image 3.Times the image has been shown
+
+
+let productContainer = document.querySelector('section');
+let voteButton = document.querySelector('section + div');
+
+let image1 = document.querySelector('section img:first-child');
+let image2 = document.querySelector('section img:nth-child(2)');
+let image3 = document.querySelector('section img:nth-child(3)');
+
+function Product(name, fileExtension = 'jpg') {
+  this.name = name;
+  this.src = `images/${this.name}.${fileExtension}`;
+  this.views = 0;
+}
+
+let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep'];
+let productObjectList = [];
+
+
+for (let i=0; i<productList.length; i++) {
+  let product = new Product(productList[i]);
+  productObjectList.push(product);
+}
+
+function getRandomProduct() {
+
+  return Math.floor(Math.random() * productObjectList.length);
+}
+
+function renderProductList() {
+
+  let displayProduct1 = getRandomProduct();
+  let displayProduct2 = getRandomProduct();
+  while(displayProduct2 === displayProduct1){
+    displayProduct2 = getRandomProduct();
+  }
+  let displayProduct3 = getRandomProduct();
+  while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
+    displayProduct3 = getRandomProduct();
+  }
+
+  return[displayProduct1,displayProduct2,displayProduct3];
+
+}
+
+let displayObjects = renderProductList();
+
+
+image1.src = productObjectList[displayObjects[0]].src;
+image2.src = productObjectList[displayObjects[1]].src;
+image3.src = productObjectList[displayObjects[2]].src;
+
+
+
+
+//chart stuff
+
+// const myChart = new Chart(
+//   document.getElementById('myChart'),
+//   config
+// );
+
+
+
+>>>>>>> Stashed changes
 /* In Class Demo Code
 
 Goat Picker
