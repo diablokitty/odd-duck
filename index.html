@@ -13,19 +13,44 @@
 <body>
   <h1>Odd Duck Product Ideas</h1>
 
-  <p>Please vote for your favorite!</p>
+
+  <form id="votingRoundsForm">
+
+    <head>
+      <h3>Desired Number of Voting Rounds</h3>
+    </head>
+    <fieldset>
+      <label> Desired Number of Rounds
+        <input type="text" name="avg">
+      </label>
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>
+
+
+  <h1>Odd Duck Product Ideas</h1>
+
+  <p>Please vote for your favorite! Click on the image you prefer.</p>
 
   <section>
     <img>
     <img>
     <img>
   </section>
-  <div>Current Voting Results</div>
-  <ul></ul>
 
-  <a href="Admin Page">admin.html</a>
+  
+
+  <div>
+    Current Voting Results
+    <ul id="results"></ul>
+  </div>
+
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
+
   <script src="js/app.js"></script>
 
 </body>
-
-</html>

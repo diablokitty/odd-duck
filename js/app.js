@@ -41,18 +41,118 @@ Also based on that value, ensure that your randomizer is properly handling the s
 let productContainer = document.querySelector('section');
 let voteButton = document.querySelector('section + div');
 
+let clicks = 0;
+let clickAllowed = 3; // TODO: CHANGE ME BACK TO USER DEFINED INPUT
+let render = true;
+
+let image1 = document.querySelector('section img:first-child');
+let image2 = document.querySelector('section img:nth-child(2)');
+let image3 = document.querySelector('section img:nth-child(3)');
+
+
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `images/${this.name}.${fileExtension}`;
   this.views = 0;
+  this.clicks = 0;
 }
 
-//Can I build an array from the images folder and use it to call the Product function?
+let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep'];
+let productObjectList = [];
+
+
+for (let i=0; i<productList.length; i++) {
+  let product = new Product(productList[i]);
+  productObjectList.push(product);
+}
+
+function getRandomProduct() {
+
+  return Math.floor(Math.random() * productObjectList.length);
+}
+
+function renderProductList() {
+
+  let displayProduct1 = getRandomProduct();
+  let displayProduct2 = getRandomProduct();
+  while(displayProduct2 === displayProduct1){
+    displayProduct2 = getRandomProduct();
+  }
+  let displayProduct3 = getRandomProduct();
+  while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
+    displayProduct3 = getRandomProduct();
+  }
+
+  let displayObjects = [displayProduct1,displayProduct2,displayProduct3];
+
+  image1.src = productObjectList[displayObjects[0]].src;
+  image1.alt = productObjectList[displayObjects[0]].name;
+  productObjectList[displayObjects[0]].views++;
+  image2.src = productObjectList[displayObjects[1]].src;
+  image2.alt = productObjectList[displayObjects[1]].name;
+  productObjectList[displayObjects[1]].views++;
+  image3.src = productObjectList[displayObjects[2]].src;
+  image3.alt = productObjectList[displayObjects[2]].name;
+  productObjectList[displayObjects[2]].views++;
+}
+
+renderProductList();
+
+function handleProductVoteClick(event) {
+
+  if(event.target === productContainer) {
+
+    alert('Please click a product image.');
+  }
+  clicks++;
+  let clickedObjectName = event.target.alt;
+  console.log(clickedObjectName);
+  for (let i=0; i<productObjectList.length; i++) {
+    if(clickedObjectName === productObjectList[i].name) {
+      productObjectList[i].clicks++;
+      console.log(productObjectList[i]);
+      break;
+    }
+  }
+  renderProductList();
+  if (clicks === clickAllowed) {
+    voteButton.className = 'clicks-allowed';
+    productContainer.removeEventListener('click', handleProductVoteClick);
+    voteButton.addEventListener('click', handleVoteButtonClick);
+  }
+}
+
+function handleVoteButtonClick() {
+  renderResults();
+}
+
+function renderResults() {
+
+  // for each  goat in my array, generate a LI
+  // ex: name had X views and was clicked on X times
+  if (render) {
+    for (let i = 0; i < productObjectList.length; i++) {
+      let ul = document.querySelector('#results');
+      let li = document.createElement('li');
+      li.textContent = `${productObjectList[i].name} had ${productObjectList[i].views} views and was clicked on ${productObjectList[i].clicks} times`;
+      ul.appendChild(li);
+    }
+    render = false;
+  }
+}
+
+productContainer.addEventListener('click', handleProductVoteClick);
 
 
 
 
 
+//chart stuff
+
+// const myChart = new Chart(
+//   document.getElementById('myChart'),
+//   config
+// );
 
 
 
