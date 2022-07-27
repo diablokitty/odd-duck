@@ -40,6 +40,7 @@ Also based on that value, ensure that your randomizer is properly handling the s
 
 let productContainer = document.querySelector('section');
 let voteButton = document.querySelector('section + div');
+
 let clicks = 0;
 let clickAllowed = 3; // TODO: CHANGE ME BACK TO USER DEFINED INPUT
 let render = true;
@@ -47,6 +48,7 @@ let render = true;
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
+
 
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
@@ -144,12 +146,14 @@ productContainer.addEventListener('click', handleProductVoteClick);
 
 
 
+
 //chart stuff
 
 // const myChart = new Chart(
 //   document.getElementById('myChart'),
 //   config
 // );
+
 
 
 
