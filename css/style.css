@@ -16,7 +16,7 @@ h1{
 }
 
 h3{
-  font-size
+  font-size: large;
 }
 
 form{
@@ -31,7 +31,7 @@ section{
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin 20px;
+  margin: 20px;
 }
 
 img {

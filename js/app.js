@@ -26,7 +26,7 @@ let form = document.getElementById('votingRoundsForm');
 function handleSubmit(event) {
   event.preventDefault();
   clickAllowed = parseInt(event.target.rounds.value);
-//is there a way to pass a default here?
+  //is there a way to pass a default here?
   form.reset();
 }
 
@@ -42,7 +42,7 @@ let clicks = 0;
 let clickAllowed = 25;
 let render = true;
 
-//make 
+//make
 
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
