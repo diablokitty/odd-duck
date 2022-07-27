@@ -7,7 +7,10 @@
 //And I ported code from cookie-sales for a couple of things.
 
 
-/*Remaining Assignment Goals
+/*Remaining Assignment Goals for Lab 12
+
+
+Add chart
 
 Stretch Goals
 Handle the display and voting for an arbitrary number of images
@@ -60,7 +63,7 @@ let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','ch
 let productObjectList = [];
 
 
-for (let i=0; i<productList.length; i++) {
+for (let i=0; i<(productList.length); i++) {
   let product = new Product(productList[i]);
   productObjectList.push(product);
 }
@@ -69,6 +72,7 @@ function getRandomProduct() {
 
   return Math.floor(Math.random() * productObjectList.length);
 }
+console.log(productObjectList);
 
 function renderProductList() {
 
