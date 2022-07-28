@@ -29,7 +29,6 @@ let form = document.getElementById('votingRoundsForm');
 function handleSubmit(event) {
   event.preventDefault();
   clickAllowed = parseInt(event.target.rounds.value);
-  //is there a way to pass a default here?
   form.reset();
 }
 
@@ -44,7 +43,8 @@ let voteButton = document.querySelector('section + div');
 let clicks = 0;
 let clickAllowed = 25;
 let render = true;
-
+let displayObjects = [];
+let productNumber = 3;
 //make
 
 let image1 = document.querySelector('section img:first-child');
@@ -59,11 +59,11 @@ function Product(name, fileExtension = 'jpg') {
   this.clicks = 0;
 }
 
-let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep'];
+let productList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep.png', 'tauntaun', 'unicorn', 'water-can', 'wine-glass'];
 let productObjectList = [];
 
 
-for (let i=0; i<(productList.length); i++) {
+for (let i = 0; i < (productList.length); i++) {
   let product = new Product(productList[i]);
   productObjectList.push(product);
 }
@@ -76,17 +76,20 @@ console.log(productObjectList);
 
 function renderProductList() {
 
-  let displayProduct1 = getRandomProduct();
-  let displayProduct2 = getRandomProduct();
-  while(displayProduct2 === displayProduct1){
-    displayProduct2 = getRandomProduct();
-  }
-  let displayProduct3 = getRandomProduct();
-  while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
-    displayProduct3 = getRandomProduct();
-  }
+  // let displayProduct1 = getRandomProduct();
+  // let displayProduct2 = getRandomProduct();
+  // while(displayProduct2 === displayProduct1){
+  //   displayProduct2 = getRandomProduct();
+  // }
+  // let displayProduct3 = getRandomProduct();
+  // while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
+  //   displayProduct3 = getRandomProduct();
+  // }
 
-  let displayObjects = [displayProduct1,displayProduct2,displayProduct3];
+  //  [displayProduct1,displayProduct2,displayProduct3];
+  buildRandomArray();
+
+  //refactor this code to display the number of objects chosen by a user form
 
   image1.src = productObjectList[displayObjects[0]].src;
   image1.alt = productObjectList[displayObjects[0]].name;
@@ -97,21 +100,33 @@ function renderProductList() {
   image3.src = productObjectList[displayObjects[2]].src;
   image3.alt = productObjectList[displayObjects[2]].name;
   productObjectList[displayObjects[2]].views++;
+  displayObjects.shift();
+  displayObjects.shift();
+  displayObjects.shift();
+
 }
 
+function buildRandomArray() {
+  while (displayObjects.length < 7) {
+    let displayProduct = getRandomProduct();
+    if (!displayObjects.includes(displayProduct)) {
+      displayObjects.push(displayProduct);
+    }
+  }
+}
 renderProductList();
 
 function handleProductVoteClick(event) {
 
-  if(event.target === productContainer) {
+  if (event.target === productContainer) {
 
     alert('Please click a product image.');
   }
   clicks++;
   let clickedObjectName = event.target.alt;
   console.log(clickedObjectName);
-  for (let i=0; i<productObjectList.length; i++) {
-    if(clickedObjectName === productObjectList[i].name) {
+  for (let i = 0; i < productObjectList.length; i++) {
+    if (clickedObjectName === productObjectList[i].name) {
       productObjectList[i].clicks++;
       console.log(productObjectList[i]);
       break;
