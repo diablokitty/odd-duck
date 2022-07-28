@@ -44,7 +44,9 @@ let clicks = 0;
 let clickAllowed = 25;
 let render = true;
 let displayObjects = [];
-let productNumber = 3;
+let voteRecord = [];
+
+//let productNumber = 3;
 //make
 
 let image1 = document.querySelector('section img:first-child');
@@ -59,11 +61,43 @@ function Product(name, fileExtension = 'jpg') {
   this.clicks = 0;
 }
 
+
+useStoredProducts(name, src, views, clicks){
+//This will not work without changes to  the constructor
+  let Product = new product(name, };
+    
+    let productObjectList = [];
+    // Render and LI with information about the ordered drink:
+    drinkObj.renderADrink();
+}
+
 let productList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep.png', 'tauntaun', 'unicorn', 'water-can', 'wine-glass'];
-let productObjectList = [];
+//NEED TO WRAP THIS LIST IN A '!CONTAINS" conditional statement so there aren't duplicate objects 
+
+function getStoredVotes() {
+  // check if I have drinks (order) in storage
+  let potentialVotes = localStorage.getItem('products')
+  // if there are no orders potentialOrders will be null
+  if (potentialOrders) {
+    // turn the potential orders back into Plain old JavaScript objects
+    let parsedVotes = JSON.parse(potentialVotes);
+    // turn them back into instances of Drinks
+    // run the data back througgh the constructor again - REINSTANTIATE
+
+    for (let order of parsedVotes) {
+      console.log(order);
+      // extract values from the POJOs
+      let name = product.name;
+      let src = product.src;
+      let click = product.click;
+      let view= product.view;
+
+      // pass those values into my helper function that will create drink objects
+      makeADrink(name, drinkType, milk, size)
 
 
 for (let i = 0; i < (productList.length); i++) {
+  
   let product = new Product(productList[i]);
   productObjectList.push(product);
 }
@@ -129,9 +163,22 @@ function handleProductVoteClick(event) {
     if (clickedObjectName === productObjectList[i].name) {
       productObjectList[i].clicks++;
       console.log(productObjectList[i]);
+      storeVotes();
       break;
     }
   }
+}
+
+//KEEP PRODUCT INFO IN LOCAL STORAGE
+
+function storeVotes() {
+
+  console.log(productObjectList);
+  let stringifiedProducts = JSON.stringify(productObjectList);
+  console.log(stringifiedProducts);
+  localStorage.setItem('products', voteRecord);
+
+
   renderProductList();
   if (clicks === clickAllowed) {
     voteButton.className = 'clicks-allowed';
@@ -158,6 +205,7 @@ function renderResults() {
     render = false;
   }
 }
+
 
 productContainer.addEventListener('click', handleProductVoteClick);
 
