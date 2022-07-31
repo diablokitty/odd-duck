@@ -7,7 +7,10 @@
 //And I ported code from cookie-sales for a couple of things.
 
 
-/*Remaining Assignment Goals
+/*Remaining Assignment Goals for Lab 12
+
+
+Add chart
 
 Stretch Goals
 Handle the display and voting for an arbitrary number of images
@@ -26,7 +29,6 @@ let form = document.getElementById('votingRoundsForm');
 function handleSubmit(event) {
   event.preventDefault();
   clickAllowed = parseInt(event.target.rounds.value);
-  //is there a way to pass a default here?
   form.reset();
 }
 
@@ -41,7 +43,10 @@ let voteButton = document.querySelector('section + div');
 let clicks = 0;
 let clickAllowed = 25;
 let render = true;
+let displayObjects = [];
+let voteRecord = [];
 
+//let productNumber = 3;
 //make
 
 let image1 = document.querySelector('section img:first-child');
@@ -49,22 +54,49 @@ let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 
 
-function Product(name, fileExtension = 'jpg') {
+function Product(name, fileExtension = 'jpg', views = 0, clicks = 0) {
   this.name = name;
   this.src = `images/${this.name}.${fileExtension}`;
-  this.views = 0;
-  this.clicks = 0;
+  this.views = views;
+  this.clicks = clicks;
 }
 
+useStoredProducts(name, src, views, clicks){
+//This will not work without changes to  the constructor
+  let Product = new product(name, };
+    
+    let productObjectList = [];
+    // Render and LI with information about the ordered drink:
+    drinkObj.renderADrink();
+}
+
+let productList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep.png', 'tauntaun', 'unicorn', 'water-can', 'wine-glass'];
+//NEED TO WRAP THIS LIST IN A '!CONTAINS" conditional statement so there aren't duplicate objects 
+
+function getStoredVotes() {
+  // check if I have drinks (order) in storage
+  let potentialVotes = localStorage.getItem('products')
+  // if there are no orders potentialOrders will be null
+  if (potentialOrders) {
+    // turn the potential orders back into Plain old JavaScript objects
+    let parsedVotes = JSON.parse(potentialVotes);
+    // turn them back into instances of Drinks
+    // run the data back througgh the constructor again - REINSTANTIATE
+
+    for (let order of parsedVotes) {
+      console.log(order);
+      // extract values from the POJOs
+      let name = product.name;
+      let src = product.src;
+      let click = product.click;
+      let view= product.view;
+
+      // pass those values into my helper function that will create drink objects
+      makeADrink(name, drinkType, milk, size)
 
 
-
-
-let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep'];
-let productObjectList = [];
-
-
-for (let i=0; i<productList.length; i++) {
+for (let i = 0; i < (productList.length); i++) {
+  
   let product = new Product(productList[i]);
   productObjectList.push(product);
 }
@@ -73,20 +105,24 @@ function getRandomProduct() {
 
   return Math.floor(Math.random() * productObjectList.length);
 }
+console.log(productObjectList);
 
 function renderProductList() {
 
-  let displayProduct1 = getRandomProduct();
-  let displayProduct2 = getRandomProduct();
-  while(displayProduct2 === displayProduct1){
-    displayProduct2 = getRandomProduct();
-  }
-  let displayProduct3 = getRandomProduct();
-  while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
-    displayProduct3 = getRandomProduct();
-  }
+  // let displayProduct1 = getRandomProduct();
+  // let displayProduct2 = getRandomProduct();
+  // while(displayProduct2 === displayProduct1){
+  //   displayProduct2 = getRandomProduct();
+  // }
+  // let displayProduct3 = getRandomProduct();
+  // while(displayProduct3 === displayProduct1 || displayProduct3 === displayProduct2){
+  //   displayProduct3 = getRandomProduct();
+  // }
 
-  let displayObjects = [displayProduct1,displayProduct2,displayProduct3];
+  //  [displayProduct1,displayProduct2,displayProduct3];
+  buildRandomArray();
+
+  //refactor this code to display the number of objects chosen by a user form
 
   image1.src = productObjectList[displayObjects[0]].src;
   image1.alt = productObjectList[displayObjects[0]].name;
@@ -97,26 +133,51 @@ function renderProductList() {
   image3.src = productObjectList[displayObjects[2]].src;
   image3.alt = productObjectList[displayObjects[2]].name;
   productObjectList[displayObjects[2]].views++;
+  displayObjects.shift();
+  displayObjects.shift();
+  displayObjects.shift();
+
 }
 
+function buildRandomArray() {
+  while (displayObjects.length < 7) {
+    let displayProduct = getRandomProduct();
+    if (!displayObjects.includes(displayProduct)) {
+      displayObjects.push(displayProduct);
+    }
+  }
+}
 renderProductList();
 
 function handleProductVoteClick(event) {
 
-  if(event.target === productContainer) {
+  if (event.target === productContainer) {
 
     alert('Please click a product image.');
   }
   clicks++;
   let clickedObjectName = event.target.alt;
   console.log(clickedObjectName);
-  for (let i=0; i<productObjectList.length; i++) {
-    if(clickedObjectName === productObjectList[i].name) {
+  for (let i = 0; i < productObjectList.length; i++) {
+    if (clickedObjectName === productObjectList[i].name) {
       productObjectList[i].clicks++;
       console.log(productObjectList[i]);
+      storeVotes();
       break;
     }
   }
+}
+
+//KEEP PRODUCT INFO IN LOCAL STORAGE
+
+function storeVotes() {
+
+  console.log(productObjectList);
+  let stringifiedProducts = JSON.stringify(productObjectList);
+  console.log(stringifiedProducts);
+  localStorage.setItem('products', voteRecord);
+
+
   renderProductList();
   if (clicks === clickAllowed) {
     voteButton.className = 'clicks-allowed';
@@ -143,6 +204,7 @@ function renderResults() {
     render = false;
   }
 }
+
 
 productContainer.addEventListener('click', handleProductVoteClick);
 
