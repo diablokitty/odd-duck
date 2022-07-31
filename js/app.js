@@ -56,6 +56,10 @@ function Product(name, fileExtension = 'jpg') {
   this.clicks = 0;
 }
 
+
+
+
+
 let productList = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep'];
 let productObjectList = [];
 
