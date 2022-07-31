@@ -54,13 +54,12 @@ let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 
 
-function Product(name, fileExtension = 'jpg') {
+function Product(name, fileExtension = 'jpg', views = 0, clicks = 0) {
   this.name = name;
   this.src = `images/${this.name}.${fileExtension}`;
-  this.views = 0;
-  this.clicks = 0;
+  this.views = views;
+  this.clicks = clicks;
 }
-
 
 useStoredProducts(name, src, views, clicks){
 //This will not work without changes to  the constructor
