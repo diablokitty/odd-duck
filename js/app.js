@@ -7,21 +7,6 @@
 //And I ported code from cookie-sales for a couple of things.
 //I also got assistance from Brooke on the localStorage problem
 
-/*Remaining Assignment Goals for Lab 12
-
-
-Add chart
-
-
-
-Stretch Goals
-Handle the display and voting for an arbitrary number of images
-Using a variable, declare in your JS how many images to show.
-Based on that value, dynamically create that many <img> tags
-Also based on that value, ensure that your randomizer is properly handling the specified number of images for display and repeat tracking.
-*/
-
-
 
 //construct object for images:
 //properties 1.Name of the product 2.File path of image 3.Times the image has been shown
