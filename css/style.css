@@ -40,3 +40,8 @@ width: 300px;
 height: 300px;
 
 }
+
+#resultsdiv {
+  border: 5px solid black;
+  padding: 20px;
+}
