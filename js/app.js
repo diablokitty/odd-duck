@@ -232,13 +232,13 @@ const data = {
   }]
 };
 
-const myChart = new Chart(
-  document.getElementById('myChart').getContext('2d'),
-  config
-);
+// const myChart = new Chart(
+//   document.getElementById('myChart').getContext('2d'),
+//   config
+// );
 
-const config = {
-  type: 'pie',
-  data: data,
-};
+// const config = {
+//   type: 'pie',
+//   data: data,
+// };
 
